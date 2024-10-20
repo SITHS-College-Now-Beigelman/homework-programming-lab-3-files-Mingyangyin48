@@ -6,47 +6,42 @@
 #include <fstream>
 #include <string>
 
-
 using namespace std;
 
 int main () 
 {
-    // setting variables
+    ifstream inFile; // reads the file
 
-    ifstream inFile;
+    inFile.open("transactions.txt"); // opens the file
 
-    inFile.open("transactions.txt");
-
+        // setting variables
     int transactions;
     double totalMoney;
     double totalDebit = 0;
     double totalCredit = 0;
 
-    inFile >> totalMoney;
-    cout << "The user has " << totalMoney << " in their account." << endl;
+    inFile >> totalMoney; // reading what the total money is 
+    cout << "The user has " << totalMoney << " in their account." << endl; // telling the user what the total money is
     cout << endl;
 
-
-
-    for (transactions = 0; transactions < 7; transactions++)
+    for (transactions = 0; transactions < 7; transactions++) // there are 7 transactions done.
     {
+            // setting variables
         double transactionAmount;
         char transactionType; 
         string transactionName;
-        inFile >> transactionType >> transactionAmount;
+        inFile >> transactionType >> transactionAmount; // reading the transaction type and the amount of money
 
         switch (transactionType)
         {
-            case 'D':
+            case 'D': // if in the case of deposits add to credit and the total transaction amount
             {
                 transactionName = "credit";
                 totalCredit += transactionAmount;
                 totalMoney += transactionAmount;
-
                 break;
             }
-
-            case 'W':
+            case 'W': // if in the case of withdraws add to debits and subtact to the total transaction amount
             {
                 transactionName = "debit";
                 totalDebit += transactionAmount;
@@ -55,15 +50,16 @@ int main ()
             }
         }
 
-        cout << "Amount from " << transactionName << " transactions is: " << transactionAmount << endl;
-        cout << "The total amount in the user's account is: " << totalMoney << endl;
+        cout << "Amount from " << transactionName << " transactions is: " << transactionAmount << endl; // telling user what the trasaction is 
+        cout << "The total amount in the user's account is: " << totalMoney << endl; // telling the user how much money is left after that transaction
     }
-
+        // at the end 
     cout << endl;
-    cout << "The final amount in the user's account is: " << totalMoney << endl;
-    cout << "Total credit transactions: " << totalCredit << " Total debit transactions: " << totalDebit << endl;
+    cout << "The final amount in the user's account is: " << totalMoney << endl; // tells the user the total amount of money
+    cout << "Total credit transactions: " << totalCredit << " Total debit transactions: " << totalDebit << endl; ; 
+    // tells the user total amount of credit and debit
 
-    inFile.close();
+    inFile.close(); // closes the file
 
     return 0;
 }
